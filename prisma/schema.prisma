@@ -1,0 +1,119 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum Role {
+  ADMIN
+  EMPLOYEE
+}
+
+enum Severity {
+  MINOR
+  MODERATE
+  SEVERE
+}
+
+enum AccidentStatus {
+  OPEN
+  INVESTIGATING
+  CLOSED
+}
+
+enum EmbedMode {
+  LINK
+  IFRAME
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(EMPLOYEE)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  documents       Document[]
+  accidentReports AccidentReport[]
+  medications     Medication[]
+  externalSystems ExternalSystem[]
+}
+
+// Controls which sections of the dashboard employees can see.
+// Admins always see every module regardless of this flag.
+model Module {
+  id                String  @id @default(cuid())
+  key               String  @unique
+  label             String
+  description       String?
+  visibleToEmployee Boolean @default(true)
+  order             Int     @default(0)
+}
+
+model Document {
+  id          String   @id @default(cuid())
+  title       String
+  category    String
+  description String?
+  url         String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  createdBy   User   @relation(fields: [createdById], references: [id])
+  createdById String
+}
+
+model AccidentReport {
+  id               String         @id @default(cuid())
+  date             DateTime
+  location         String
+  severity         Severity
+  status           AccidentStatus @default(OPEN)
+  injuredCount     Int            @default(0)
+  description      String
+  correctiveAction String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  createdBy   User   @relation(fields: [createdById], references: [id])
+  createdById String
+}
+
+model Medication {
+  id         String    @id @default(cuid())
+  name       String
+  category   String
+  unit       String
+  quantity   Int
+  minStock   Int       @default(0)
+  location   String?
+  expiryDate DateTime?
+  note       String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  createdBy   User   @relation(fields: [createdById], references: [id])
+  createdById String
+}
+
+model ExternalSystem {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  url         String
+  embedMode   EmbedMode @default(LINK)
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+
+  createdBy   User   @relation(fields: [createdById], references: [id])
+  createdById String
+}
