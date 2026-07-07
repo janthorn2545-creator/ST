@@ -34,10 +34,10 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-xl font-semibold text-slate-900">
+        <h1 className="text-xl font-semibold text-slate-900 dark:text-white">
           สวัสดี, {user.name}
         </h1>
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
           ภาพรวมข้อมูลของแผนก ST (Safety) วันนี้
         </p>
       </div>
@@ -78,15 +78,15 @@ export default async function DashboardPage() {
               <Link
                 key={key}
                 href={meta.href}
-                className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 transition-shadow hover:shadow-md"
+                className="glass-card glass-card-hover rounded-3xl p-5"
               >
-                <p className="font-medium text-slate-900">{meta.label}</p>
-                <p className="mt-1 text-sm text-slate-500">{meta.description}</p>
+                <p className="font-medium text-slate-900 dark:text-white">{meta.label}</p>
+                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{meta.description}</p>
               </Link>
             ))}
         </div>
         {visibleKeys.size === 0 && (
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             ยังไม่มีข้อมูลที่เปิดให้เข้าถึงในขณะนี้ กรุณาติดต่อผู้ดูแลระบบ
           </p>
         )}

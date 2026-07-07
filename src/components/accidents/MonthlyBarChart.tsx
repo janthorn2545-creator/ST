@@ -9,8 +9,8 @@ export function MonthlyBarChart({ counts }: { counts: number[] }) {
   const max = Math.max(1, ...counts);
 
   return (
-    <div className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
-      <p className="mb-4 text-sm font-medium text-slate-500">
+    <div className="glass-card rounded-3xl p-5">
+      <p className="mb-4 text-sm font-medium text-slate-500 dark:text-slate-400">
         จำนวนอุบัติเหตุรายเดือน (ปีนี้)
       </p>
       <div className="flex items-end gap-2" style={{ height: MAX_BAR_HEIGHT_PX + 40 }}>
@@ -25,10 +25,10 @@ export function MonthlyBarChart({ counts }: { counts: number[] }) {
               title={`${THAI_MONTHS[i]}: ${count} รายการ`}
             >
               {isPeak && (
-                <span className="mb-1 text-xs font-medium text-slate-600">{count}</span>
+                <span className="mb-1 text-xs font-medium text-slate-600 dark:text-slate-300">{count}</span>
               )}
               <div
-                className="w-full max-w-[24px] rounded-t-[4px] bg-blue-500 transition-colors group-hover:bg-blue-600"
+                className="w-full max-w-[24px] rounded-t-[4px] bg-indigo-500 transition-colors group-hover:bg-indigo-400"
                 style={{ height: barHeightPx }}
               />
               <span className="mt-2 text-[11px] text-slate-400">{THAI_MONTHS[i]}</span>

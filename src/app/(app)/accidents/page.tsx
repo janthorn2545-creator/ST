@@ -42,7 +42,7 @@ export default async function AccidentsPage() {
           isAdmin && (
             <Link
               href="/accidents/new"
-              className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-800"
+              className="btn-gradient rounded-2xl px-5 py-2.5 text-sm font-bold"
             >
               + บันทึกอุบัติเหตุ
             </Link>
@@ -71,9 +71,9 @@ export default async function AccidentsPage() {
       {reports.length === 0 ? (
         <EmptyState message="ยังไม่มีรายงานอุบัติเหตุในระบบ" />
       ) : (
-        <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+        <div className="overflow-hidden rounded-3xl glass-card">
           <table className="w-full text-left text-sm">
-            <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
+            <thead className="bg-slate-100/60 dark:bg-slate-900/40 text-[10px] uppercase tracking-widest text-slate-400">
               <tr>
                 <th className="px-4 py-3 font-medium">วันที่</th>
                 <th className="px-4 py-3 font-medium">สถานที่</th>
@@ -83,15 +83,15 @@ export default async function AccidentsPage() {
                 {isAdmin && <th className="px-4 py-3 font-medium" />}
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-200/70 dark:divide-slate-700/50">
               {reports.map((r) => (
-                <tr key={r.id} className="align-top hover:bg-slate-50">
-                  <td className="whitespace-nowrap px-4 py-3 text-slate-600">
+                <tr key={r.id} className="align-top hover:bg-slate-50 dark:hover:bg-slate-700/30">
+                  <td className="whitespace-nowrap px-4 py-3 text-slate-600 dark:text-slate-300">
                     {r.date.toLocaleDateString("th-TH")}
                   </td>
                   <td className="px-4 py-3">
-                    <p className="font-medium text-slate-900">{r.location}</p>
-                    <p className="mt-0.5 max-w-md text-xs text-slate-500">{r.description}</p>
+                    <p className="font-medium text-slate-900 dark:text-white">{r.location}</p>
+                    <p className="mt-0.5 max-w-md text-xs text-slate-500 dark:text-slate-400">{r.description}</p>
                   </td>
                   <td className="px-4 py-3">
                     <SeverityBadge severity={r.severity} />
@@ -99,13 +99,13 @@ export default async function AccidentsPage() {
                   <td className="px-4 py-3">
                     <AccidentStatusBadge status={r.status} />
                   </td>
-                  <td className="px-4 py-3 text-slate-600">{r.injuredCount}</td>
+                  <td className="px-4 py-3 text-slate-600 dark:text-slate-300">{r.injuredCount}</td>
                   {isAdmin && (
                     <td className="px-4 py-3 text-right">
                       <div className="flex justify-end gap-1">
                         <Link
                           href={`/accidents/${r.id}/edit`}
-                          className="rounded-lg px-2.5 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100"
+                          className="rounded-xl px-3 py-1.5 text-sm font-semibold text-indigo-500 transition-colors hover:bg-indigo-500/10"
                         >
                           แก้ไข
                         </Link>

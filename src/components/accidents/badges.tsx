@@ -1,7 +1,7 @@
 const SEVERITY_STYLE: Record<string, string> = {
-  MINOR: "bg-emerald-50 text-emerald-700",
-  MODERATE: "bg-amber-50 text-amber-700",
-  SEVERE: "bg-red-50 text-red-700",
+  MINOR: "bg-emerald-500/10 text-emerald-500",
+  MODERATE: "bg-amber-500/10 text-amber-500",
+  SEVERE: "bg-rose-500/10 text-rose-500",
 };
 
 const SEVERITY_LABEL: Record<string, string> = {
@@ -11,9 +11,9 @@ const SEVERITY_LABEL: Record<string, string> = {
 };
 
 const STATUS_STYLE: Record<string, string> = {
-  OPEN: "bg-red-50 text-red-700",
-  INVESTIGATING: "bg-amber-50 text-amber-700",
-  CLOSED: "bg-emerald-50 text-emerald-700",
+  OPEN: "bg-rose-500/10 text-rose-500",
+  INVESTIGATING: "bg-amber-500/10 text-amber-500",
+  CLOSED: "bg-emerald-500/10 text-emerald-500",
 };
 
 const STATUS_LABEL: Record<string, string> = {
@@ -25,7 +25,7 @@ const STATUS_LABEL: Record<string, string> = {
 export function SeverityBadge({ severity }: { severity: string }) {
   return (
     <span
-      className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${SEVERITY_STYLE[severity] ?? "bg-slate-100 text-slate-600"}`}
+      className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${SEVERITY_STYLE[severity] ?? "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"}`}
     >
       {SEVERITY_LABEL[severity] ?? severity}
     </span>
@@ -35,7 +35,7 @@ export function SeverityBadge({ severity }: { severity: string }) {
 export function AccidentStatusBadge({ status }: { status: string }) {
   return (
     <span
-      className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${STATUS_STYLE[status] ?? "bg-slate-100 text-slate-600"}`}
+      className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${STATUS_STYLE[status] ?? "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"}`}
     >
       {STATUS_LABEL[status] ?? status}
     </span>

@@ -24,7 +24,7 @@ export function ModuleToggle({ moduleId, initialVisible }: { moduleId: string; i
       aria-checked={visible}
       className={[
         "relative h-6 w-11 shrink-0 rounded-full transition-colors disabled:opacity-60",
-        visible ? "bg-emerald-500" : "bg-slate-300",
+        visible ? "bg-emerald-500" : "bg-slate-300 dark:bg-slate-700",
       ].join(" ")}
     >
       <span

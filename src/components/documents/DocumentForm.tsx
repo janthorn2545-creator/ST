@@ -4,6 +4,11 @@ import { useActionState } from "react";
 import { Field, TextInput, TextArea, FormActions, SubmitButton } from "@/components/form";
 import type { FormState } from "@/app/actions/documents";
 
+/** Uploaded files are stored on Vercel Blob; this distinguishes them from admin-entered links. */
+function isUploadedFileUrl(url: string) {
+  return url.includes(".blob.vercel-storage.com");
+}
+
 export function DocumentForm({
   action,
   initial,
@@ -41,7 +46,7 @@ export function DocumentForm({
           name="url"
           type="url"
           placeholder="https://..."
-          defaultValue={initial?.url && !initial.url.startsWith("/uploads/") ? initial.url : ""}
+          defaultValue={initial?.url && !isUploadedFileUrl(initial.url) ? initial.url : ""}
         />
       </Field>
 
@@ -50,10 +55,10 @@ export function DocumentForm({
           id="file"
           name="file"
           type="file"
-          className="block w-full text-sm text-slate-600 file:mr-4 file:rounded-lg file:border-0 file:bg-slate-100 file:px-4 file:py-2 file:text-sm file:font-medium file:text-slate-700 hover:file:bg-slate-200"
+          className="block w-full text-sm text-slate-600 dark:text-slate-300 file:mr-4 file:rounded-lg file:border-0 file:bg-slate-100 dark:file:bg-slate-800 file:px-4 file:py-2 file:text-sm file:font-medium file:text-slate-700 dark:file:text-slate-200 hover:file:bg-slate-200 dark:hover:file:bg-slate-700"
         />
-        {initial?.url?.startsWith("/uploads/") && (
-          <p className="mt-1 text-xs text-slate-500">
+        {initial?.url && isUploadedFileUrl(initial.url) && (
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
             ไฟล์ปัจจุบัน:{" "}
             <a href={initial.url} target="_blank" rel="noopener noreferrer" className="underline">
               เปิดไฟล์
@@ -64,7 +69,7 @@ export function DocumentForm({
       </Field>
 
       {state?.error && (
-        <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600">{state.error}</p>
+        <p className="rounded-2xl bg-rose-500/10 px-4 py-2.5 text-sm font-medium text-rose-500">{state.error}</p>
       )}
 
       <FormActions>

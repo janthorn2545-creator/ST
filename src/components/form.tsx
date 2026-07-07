@@ -1,8 +1,5 @@
 import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
 
-const inputClass =
-  "w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500";
-
 export function Field({
   label,
   htmlFor,
@@ -16,9 +13,9 @@ export function Field({
 }) {
   return (
     <div>
-      <label htmlFor={htmlFor} className="mb-1 block text-sm font-medium text-slate-700">
+      <label htmlFor={htmlFor} className="lbl">
         {label}
-        {required && <span className="text-red-500"> *</span>}
+        {required && <span className="text-rose-500"> *</span>}
       </label>
       {children}
     </div>
@@ -26,15 +23,15 @@ export function Field({
 }
 
 export function TextInput({ className, ...props }: InputHTMLAttributes<HTMLInputElement>) {
-  return <input {...props} className={className ? `${inputClass} ${className}` : inputClass} />;
+  return <input {...props} className={className ? `inp ${className}` : "inp"} />;
 }
 
 export function TextArea(props: TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  return <textarea {...props} className={inputClass} />;
+  return <textarea {...props} className="inp" />;
 }
 
 export function Select(props: SelectHTMLAttributes<HTMLSelectElement>) {
-  return <select {...props} className={inputClass} />;
+  return <select {...props} className="inp" />;
 }
 
 export function FormActions({ children }: { children: ReactNode }) {
@@ -46,7 +43,7 @@ export function SubmitButton({ pending, label, pendingLabel }: { pending: boolea
     <button
       type="submit"
       disabled={pending}
-      className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-800 disabled:opacity-60"
+      className="btn-gradient rounded-2xl px-6 py-3 text-sm font-bold disabled:opacity-60"
     >
       {pending ? pendingLabel : label}
     </button>

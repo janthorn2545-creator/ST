@@ -49,9 +49,9 @@ export default async function EditUserPage({
               type="checkbox"
               defaultChecked={user.active}
               disabled={isSelf}
-              className="h-4 w-4 rounded border-slate-300"
+              className="h-4 w-4 rounded border-slate-300 dark:border-slate-600"
             />
-            <label htmlFor="active" className="text-sm font-medium text-slate-700">
+            <label htmlFor="active" className="text-sm font-medium text-slate-700 dark:text-slate-300">
               เปิดใช้งานบัญชีนี้
             </label>
           </div>
@@ -62,8 +62,8 @@ export default async function EditUserPage({
         </form>
       </div>
 
-      <div className="max-w-xl border-t border-slate-200 pt-8">
-        <h2 className="mb-4 text-sm font-semibold text-slate-900">รีเซ็ตรหัสผ่าน</h2>
+      <div className="max-w-xl border-t border-slate-200 dark:border-slate-700/50 pt-8">
+        <h2 className="mb-4 text-sm font-semibold text-slate-900 dark:text-white">รีเซ็ตรหัสผ่าน</h2>
         <form action={resetUserPassword.bind(null, user.id)} className="space-y-4">
           <Field label="รหัสผ่านใหม่" htmlFor="password" required>
             <TextInput id="password" name="password" type="password" required minLength={8} />

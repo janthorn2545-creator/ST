@@ -29,19 +29,19 @@ export default async function AdminOverviewPage() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Link
           href="/admin/users"
-          className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 transition-shadow hover:shadow-md"
+          className="glass-card glass-card-hover rounded-3xl p-5"
         >
-          <p className="font-medium text-slate-900">จัดการผู้ใช้งาน</p>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="font-medium text-slate-900 dark:text-white">จัดการผู้ใช้งาน</p>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             เพิ่ม/แก้ไขผู้ใช้ กำหนดสิทธิ์แอดมินหรือพนักงาน และรีเซ็ตรหัสผ่าน
           </p>
         </Link>
         <Link
           href="/admin/modules"
-          className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 transition-shadow hover:shadow-md"
+          className="glass-card glass-card-hover rounded-3xl p-5"
         >
-          <p className="font-medium text-slate-900">เปิด/ปิดข้อมูลสำหรับพนักงาน</p>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="font-medium text-slate-900 dark:text-white">เปิด/ปิดข้อมูลสำหรับพนักงาน</p>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             กำหนดว่าข้อมูลส่วนใดที่พนักงานทั่วไปสามารถเข้าถึงได้
           </p>
         </Link>

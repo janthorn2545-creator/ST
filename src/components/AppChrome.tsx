@@ -5,7 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { logout } from "@/app/actions/auth";
-import { HomeIcon, SettingsIcon, LogoutIcon } from "@/components/icons";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { Home, Settings, LogOut, Menu, ShieldCheck } from "lucide-react";
 
 export type NavItem = {
   href: string;
@@ -21,12 +22,12 @@ const ROLE_LABEL: Record<string, string> = {
 function Brand() {
   return (
     <div className="flex items-center gap-3 px-2">
-      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-500 text-sm font-bold text-white">
-        ST
+      <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 shadow-lg shadow-indigo-500/30">
+        <ShieldCheck className="h-5 w-5 text-white" />
       </div>
       <div>
-        <p className="text-sm font-semibold text-slate-900">แผนก ST</p>
-        <p className="text-xs text-slate-500">Safety Dashboard</p>
+        <p className="text-sm font-bold text-slate-900 dark:text-white">แผนก ST</p>
+        <p className="text-xs font-medium text-slate-400">Safety Dashboard</p>
       </div>
     </div>
   );
@@ -38,15 +39,17 @@ function NavLinks({ navItems, isAdmin, onNavigate }: { navItems: NavItem[]; isAd
   const linkClass = (href: string) => {
     const active = href === "/dashboard" ? pathname === href : pathname?.startsWith(href);
     return [
-      "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-      active ? "bg-amber-500/15 text-amber-700" : "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
+      "flex items-center gap-3 rounded-2xl px-3.5 py-2.5 text-sm font-semibold transition-all",
+      active
+        ? "bg-gradient-to-r from-indigo-500/15 to-purple-500/15 text-indigo-500 ring-1 ring-indigo-500/20"
+        : "text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/60 dark:hover:text-white",
     ].join(" ");
   };
 
   return (
     <nav className="flex flex-1 flex-col gap-1">
       <Link href="/dashboard" className={linkClass("/dashboard")} onClick={onNavigate}>
-        <HomeIcon className="h-5 w-5" />
+        <Home className="h-5 w-5" />
         หน้าหลัก
       </Link>
 
@@ -59,11 +62,11 @@ function NavLinks({ navItems, isAdmin, onNavigate }: { navItems: NavItem[]; isAd
 
       {isAdmin && (
         <>
-          <div className="mt-4 mb-1 px-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
+          <div className="mt-4 mb-1 px-3.5 text-[11px] font-bold uppercase tracking-widest text-slate-400">
             ผู้ดูแลระบบ
           </div>
           <Link href="/admin" className={linkClass("/admin")} onClick={onNavigate}>
-            <SettingsIcon className="h-5 w-5" />
+            <Settings className="h-5 w-5" />
             ตั้งค่าระบบ
           </Link>
         </>
@@ -88,9 +91,9 @@ export function AppChrome({
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen flex-1 bg-slate-50">
+    <div className="flex min-h-screen flex-1 bg-slate-50 dark:bg-[#0f172a]">
       {/* Desktop sidebar */}
-      <aside className="hidden w-64 shrink-0 flex-col border-r border-slate-200 bg-white px-4 py-6 md:flex">
+      <aside className="hidden w-64 shrink-0 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 px-4 py-6 md:flex">
         <div className="mb-8">
           <Brand />
         </div>
@@ -103,10 +106,10 @@ export function AppChrome({
           <button
             type="button"
             aria-label="ปิดเมนู"
-            className="absolute inset-0 bg-slate-900/40"
+            className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
             onClick={() => setDrawerOpen(false)}
           />
-          <div className="relative flex h-full w-64 flex-col bg-white px-4 py-6 shadow-xl">
+          <div className="relative flex h-full w-64 flex-col bg-white dark:bg-slate-900 px-4 py-6 shadow-xl">
             <div className="mb-8">
               <Brand />
             </div>
@@ -116,32 +119,31 @@ export function AppChrome({
       )}
 
       <div className="flex min-h-screen flex-1 flex-col">
-        <header className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 md:px-8">
+        <header className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/40 backdrop-blur-xl px-4 py-3 md:px-8">
           <button
             type="button"
             aria-label="เปิดเมนู"
             onClick={() => setDrawerOpen(true)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 md:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-2xl text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 md:hidden"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-5 w-5">
-              <path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+            <Menu className="h-5 w-5" />
           </button>
 
           <div className="flex-1" />
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
             <div className="text-right">
-              <p className="text-sm font-medium text-slate-900">{name}</p>
-              <p className="text-xs text-slate-500">{ROLE_LABEL[role] ?? role}</p>
+              <p className="text-sm font-bold text-slate-900 dark:text-white">{name}</p>
+              <p className="text-xs font-medium text-slate-400">{ROLE_LABEL[role] ?? role}</p>
             </div>
             <form action={logout}>
               <button
                 type="submit"
                 title="ออกจากระบบ"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
+                className="flex h-10 w-10 items-center justify-center rounded-2xl text-slate-500 transition-colors hover:bg-rose-500/10 hover:text-rose-500"
               >
-                <LogoutIcon className="h-5 w-5" />
+                <LogOut className="h-5 w-5" />
               </button>
             </form>
           </div>

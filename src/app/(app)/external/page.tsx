@@ -23,7 +23,7 @@ export default async function ExternalSystemsPage() {
           isAdmin && (
             <Link
               href="/external/new"
-              className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-800"
+              className="btn-gradient rounded-2xl px-5 py-2.5 text-sm font-bold"
             >
               + เพิ่มระบบ
             </Link>
@@ -41,12 +41,12 @@ export default async function ExternalSystemsPage() {
             return (
               <div
                 key={system.id}
-                className="flex flex-col justify-between rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200"
+                className="glass-card glass-card-hover flex flex-col justify-between rounded-3xl p-5"
               >
                 <div>
-                  <p className="font-medium text-slate-900">{system.name}</p>
+                  <p className="font-medium text-slate-900 dark:text-white">{system.name}</p>
                   {system.description && (
-                    <p className="mt-1 text-sm text-slate-500">{system.description}</p>
+                    <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{system.description}</p>
                   )}
                 </div>
                 <div className="mt-4 flex items-center justify-between">
@@ -54,7 +54,7 @@ export default async function ExternalSystemsPage() {
                     href={href}
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
-                    className="text-sm font-medium text-amber-600 hover:underline"
+                    className="text-sm font-semibold text-indigo-500 hover:underline"
                   >
                     เปิดใช้งาน →
                   </a>
@@ -62,7 +62,7 @@ export default async function ExternalSystemsPage() {
                     <div className="flex gap-1">
                       <Link
                         href={`/external/${system.id}/edit`}
-                        className="rounded-lg px-2.5 py-1.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100"
+                        className="rounded-xl px-3 py-1.5 text-sm font-semibold text-indigo-500 transition-colors hover:bg-indigo-500/10"
                       >
                         แก้ไข
                       </Link>

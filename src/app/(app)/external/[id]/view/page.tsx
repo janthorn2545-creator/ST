@@ -17,7 +17,7 @@ export default async function ExternalSystemViewPage({
   return (
     <div className="flex h-full flex-col">
       <PageHeader title={system.name} description={system.description ?? undefined} />
-      <div className="min-h-[70vh] flex-1 overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+      <div className="min-h-[70vh] flex-1 overflow-hidden rounded-3xl glass-card">
         <iframe
           src={system.url}
           title={system.name}

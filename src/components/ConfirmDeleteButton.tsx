@@ -20,7 +20,7 @@ export function ConfirmDeleteButton({
     >
       <button
         type="submit"
-        className="rounded-lg px-2.5 py-1.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50"
+        className="rounded-xl px-3 py-1.5 text-sm font-semibold text-rose-500 transition-colors hover:bg-rose-500/10"
       >
         {label}
       </button>

@@ -1,18 +1,13 @@
 import { getCurrentUser } from "@/lib/dal";
 import { getVisibleModuleKeys, MODULE_META } from "@/lib/modules";
 import { AppChrome, type NavItem } from "@/components/AppChrome";
-import {
-  DocumentIcon,
-  AlertIcon,
-  PillIcon,
-  LinkIcon,
-} from "@/components/icons";
+import { FileText, TriangleAlert, Pill, Link2 } from "lucide-react";
 
 const MODULE_ICONS = {
-  documents: <DocumentIcon className="h-5 w-5" />,
-  accidents: <AlertIcon className="h-5 w-5" />,
-  medications: <PillIcon className="h-5 w-5" />,
-  external: <LinkIcon className="h-5 w-5" />,
+  documents: <FileText className="h-5 w-5" />,
+  accidents: <TriangleAlert className="h-5 w-5" />,
+  medications: <Pill className="h-5 w-5" />,
+  external: <Link2 className="h-5 w-5" />,
 };
 
 export default async function AppLayout({

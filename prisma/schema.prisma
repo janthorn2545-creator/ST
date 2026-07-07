@@ -7,7 +7,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
 enum Role {
@@ -42,10 +42,22 @@ model User {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  documents       Document[]
-  accidentReports AccidentReport[]
-  medications     Medication[]
-  externalSystems ExternalSystem[]
+  documents          Document[]
+  accidentReports    AccidentReport[]
+  medications        Medication[]
+  externalSystems    ExternalSystem[]
+  passwordResetTokens PasswordResetToken[]
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  token     String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
 }
 
 // Controls which sections of the dashboard employees can see.
